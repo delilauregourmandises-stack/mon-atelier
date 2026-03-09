@@ -484,53 +484,5 @@ ut) { setForm(f => ({ ...f, ingredients: [...f.ingredients, ingInput] })); setIn
               <div className="form-group">
                 <label>Quantité produite</label>
                 <input type="number" value={form.quantiteProduite} onChange={e => setForm({ ...form, quantiteProduite: e.target.value })} />
-              </div>
-              <div className="form-group" style={{ gridColumn: "span 2" }}>
-                <label>Ingrédients utilisés (traçabilité)</label>
-                <div style={{ display: "flex", gap: 8 }}>
-                  <select value={ingInput} onChange={e => setIngInput(e.target.value)} style={{ flex: 1, padding: "9px 12px", borderRadius: 10, border: `1.5px solid ${colors.border}`, background: colors.cream, fontFamily: "Nunito, sans-serif" }}>
-                    <option value="">-- Choisir un ingrédient --</option>
-                    {data.stocks.map(s => <option key={s.id} value={s.nom}>{s.nom} (lot {s.lot})</option>)}
-                  </select>
-                  <button className="btn btn-sage" onClick={addIng}>Ajouter</button>
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
-                  {form.ingredients.map((ing, i) => (
-                    <span key={i} className="badge badge-blue">{ing} <span style={{ cursor: "pointer" }} onClick={() => setForm(f => ({ ...f, ingredients: f.ingredients.filter((_, j) => j !== i) }))}>×</span></span>
-                  ))}
-                </div>
-              </div>
-              <div className="form-group" style={{ gridColumn: "span 2" }}>
-                <label>Notes / observations</label>
-                <textarea value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} placeholder="Observations sur la production..." />
-              </div>
-            </div>
-            <div className="modal-actions">
-              <button className="btn btn-outline" onClick={() => setShowModal(false)}>Annuler</button>
-              <button className="btn btn-primary" onClick={addProd}>✅ Enregistrer</button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ============ RECETTES ============
-function Recettes({ data, setData }) {
-  const [selected, setSelected] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [form, setForm] = useState({ nom: "", ingredients: [], rendement: "", unite: "pièces", prixVente: "", protocole: "" });
-  const [ingForm, setIngForm] = useState({ nom: "", quantite: "", unite: "g", prixKg: "" });
-
-  const addIngredient = () => {
-    setForm(f => ({ ...f, ingredients: [...f.ingredients, { ...ingForm, quantite: parseFloat(ingForm.quantite), prixKg: parseFloat(ingForm.prixKg) }] }));
-    setIngForm({ nom: "", quantite: "", unite: "g", prixKg: "" });
-  };
-
-  const saveRecette = () => {
-    setData(d => ({ ...d, recettes: [...d.recettes, { ...form, id: Date.now(), rendement: parseFloat(form.rendement), prixVente: parseFloat(form.prixVente) }] }));
-    setShowModal(false);
-    setForm({ nom: "", ingredients: [], rendement: "", unite: "pièces", prixVente: "", protocole: "" });
-  };
+              
               
